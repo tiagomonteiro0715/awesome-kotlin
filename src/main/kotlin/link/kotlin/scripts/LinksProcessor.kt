@@ -17,8 +17,6 @@ import java.time.temporal.ChronoUnit
 
 interface LinksProcessor {
     suspend fun process(link: Link): Link
-
-    companion object
 }
 
 private class DefaultLinksProcessor(
@@ -180,7 +178,7 @@ class CombinedLinksProcessors(
 
 private val LOGGER = logger<DefaultLinksProcessor>()
 
-fun LinksProcessor.Companion.default(
+fun LinksProcessor(
     configuration: ApplicationConfiguration,
     mapper: ObjectMapper,
     httpClient: HttpClient,

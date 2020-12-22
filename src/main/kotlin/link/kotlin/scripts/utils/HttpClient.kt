@@ -14,8 +14,6 @@ import kotlin.concurrent.thread
 
 interface HttpClient {
     suspend fun execute(request: HttpUriRequest): HttpResponse
-
-    companion object
 }
 
 fun HttpResponse.body(): String {
@@ -52,7 +50,7 @@ private suspend fun HttpAsyncClient.execute(request: HttpUriRequest): HttpRespon
     }
 }
 
-fun HttpClient.Companion.default(): HttpClient {
+fun HttpClient(): HttpClient {
     val ua = "Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:74.0) Gecko/20100101 Firefox/74.0"
 
     val asyncClient = HttpAsyncClients.custom()

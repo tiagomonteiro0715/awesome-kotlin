@@ -16,8 +16,6 @@ private val trending = listOf(
 
 interface GithubTrending {
     suspend fun fetch(): Category?
-
-    companion object
 }
 
 private class CachedGithubTrending(
@@ -85,7 +83,7 @@ private class JSoupGithubTrending(
     }
 }
 
-fun GithubTrending.Companion.default(
+fun GithubTrending(
     cache: Cache
 ): GithubTrending {
     val jSoupGithubTrending = JSoupGithubTrending()

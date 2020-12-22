@@ -19,8 +19,6 @@ interface SiteGenerator {
     fun generateSitemap(articles: List<Article>)
     fun generateFeeds(articles: List<Article>)
     fun generateArticles(articles: List<Article>)
-
-    companion object
 }
 
 private class DefaultSiteGenerator(
@@ -76,7 +74,8 @@ private class DefaultSiteGenerator(
     }
 }
 
-fun SiteGenerator.Companion.default(
+// This will be eliminated after introduction of proxy-wrapping in komodo-di
+fun SiteGenerator(
     mapper: ObjectMapper,
     kotlinVersionFetcher: KotlinVersionFetcher,
     sitemapGenerator: SitemapGenerator,

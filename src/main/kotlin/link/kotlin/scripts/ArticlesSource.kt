@@ -8,11 +8,9 @@ import kotlin.streams.toList
 
 interface ArticlesSource {
     fun getArticles(): List<Article>
-
-    companion object
 }
 
-private class FileSystemArticlesSource(
+internal class FileSystemArticlesSource(
     private val scriptEvaluator: ScriptEvaluator,
     private val articlesProcessor: ArticlesProcessor
 ) : ArticlesSource {
@@ -27,14 +25,4 @@ private class FileSystemArticlesSource(
             .sortedWith { a, b -> b.date.compareTo(a.date) }
             .map(articlesProcessor::process)
     }
-}
-
-fun ArticlesSource.Companion.default(
-    scriptEvaluator: ScriptEvaluator,
-    articlesProcessor: ArticlesProcessor
-): ArticlesSource {
-    return FileSystemArticlesSource(
-        scriptEvaluator = scriptEvaluator,
-        articlesProcessor = articlesProcessor
-    )
 }

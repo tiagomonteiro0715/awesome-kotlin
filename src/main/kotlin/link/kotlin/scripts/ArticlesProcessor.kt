@@ -4,11 +4,9 @@ import link.kotlin.scripts.dsl.Article
 
 interface ArticlesProcessor {
     fun process(article: Article): Article
-
-    companion object
 }
 
-private class DefaultArticlesProcessor(
+internal class DefaultArticlesProcessor(
     private val markdownRenderer: MarkdownRenderer
 ) : ArticlesProcessor {
     override fun process(article: Article): Article {
@@ -43,12 +41,4 @@ internal fun getFileName(title: String): String {
         .replace(Regex("-+"), "-") // Replace multiple dashes with one dash
 
     return "$escaped.html"
-}
-
-fun ArticlesProcessor.Companion.default(
-    markdownRenderer: MarkdownRenderer
-): ArticlesProcessor {
-    return DefaultArticlesProcessor(
-        markdownRenderer = markdownRenderer
-    )
 }

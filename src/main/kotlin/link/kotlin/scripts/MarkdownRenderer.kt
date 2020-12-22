@@ -7,8 +7,6 @@ import org.commonmark.renderer.html.HtmlRenderer
 
 interface MarkdownRenderer {
     fun render(md: String): String
-
-    companion object
 }
 
 private class CommonMarkMarkdownRenderer(
@@ -21,7 +19,7 @@ private class CommonMarkMarkdownRenderer(
     }
 }
 
-fun MarkdownRenderer.Companion.default(): MarkdownRenderer {
+fun markdownRenderer(): MarkdownRenderer {
     val extensions = listOf(TablesExtension.create())
     val parser = Parser.builder().extensions(extensions).build()
     val renderer = HtmlRenderer.builder().extensions(extensions).build()

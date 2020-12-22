@@ -8,8 +8,6 @@ interface ApplicationConfiguration {
     val siteUrl: String
     val cacheEnabled: Boolean
     val dryRun: Boolean
-
-    companion object
 }
 
 data class DataApplicationConfiguration(
@@ -19,7 +17,7 @@ data class DataApplicationConfiguration(
     override val dryRun: Boolean = false
 ): ApplicationConfiguration
 
-fun ApplicationConfiguration.Companion.default(): ApplicationConfiguration {
+fun ApplicationConfiguration(): ApplicationConfiguration {
     val configuration = DataApplicationConfiguration()
 
     return if (configuration.ghToken.isEmpty()) {

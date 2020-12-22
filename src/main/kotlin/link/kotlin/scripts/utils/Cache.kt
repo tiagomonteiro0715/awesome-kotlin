@@ -67,11 +67,11 @@ private class DisableCache(
 
 }
 
-fun Cache.Companion.default(
-    folder: Path = Paths.get(System.getProperty("user.home"), ".cache", "awesome-kotlin"),
+fun Cache(
     mapper: ObjectMapper,
     configuration: ApplicationConfiguration
 ): Cache {
+    val folder: Path = Paths.get(System.getProperty("user.home"), ".cache", "awesome-kotlin")
     Files.createDirectories(folder)
 
     val fileCache = FileCache(

@@ -1,8 +1,9 @@
 package link.kotlin.scripts.scripting
 
+import io.heapy.komodo.di.module
+import io.heapy.komodo.di.provide
 import link.kotlin.scripts.utils.Cache
 import link.kotlin.scripts.utils.cacheKey
-import link.kotlin.scripts.utils.default
 import kotlin.reflect.KClass
 import kotlin.script.experimental.api.ResultValue
 import kotlin.script.experimental.api.valueOrThrow
@@ -11,11 +12,9 @@ import kotlin.script.experimental.jvmhost.BasicJvmScriptingHost
 
 interface ScriptEvaluator {
     fun <T : Any> eval(source: String, name: String, type: KClass<T>): T
-
-    companion object
 }
 
-private class ScriptingScriptEvaluator(
+internal class ScriptingScriptEvaluator(
     private val scriptingHost: BasicJvmScriptingHost
 ) : ScriptEvaluator {
     override fun <T : Any> eval(source: String, name: String, type: KClass<T>): T {
@@ -43,8 +42,14 @@ private class CachingScriptEvaluator(
     }
 }
 
-fun ScriptEvaluator.Companion.default(
-    scriptingHost: BasicJvmScriptingHost = BasicJvmScriptingHost(),
+val scriptModule by module {
+    provide({ BasicJvmScriptingHost() })
+    provide(::cachingScriptEvaluator)
+}
+
+// This will be eliminated after introduction of wrapping in komodo-di
+internal fun cachingScriptEvaluator(
+    scriptingHost: BasicJvmScriptingHost,
     cache: Cache
 ): ScriptEvaluator {
     val scriptingScriptEvaluator = ScriptingScriptEvaluator(

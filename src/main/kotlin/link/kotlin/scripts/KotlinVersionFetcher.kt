@@ -14,11 +14,9 @@ import org.apache.http.client.methods.HttpGet
  */
 interface KotlinVersionFetcher {
     suspend fun getLatestVersions(branches: List<String>): List<String>
-
-    companion object
 }
 
-private class MavenCentralKotlinVersionFetcher(
+internal class MavenCentralKotlinVersionFetcher(
     private val httpClient: HttpClient
 ) : KotlinVersionFetcher {
     override suspend fun getLatestVersions(branches: List<String>): List<String> {
@@ -42,14 +40,6 @@ private class MavenCentralKotlinVersionFetcher(
     }
 
     private val versionRegex = Regex("^[0-9]+.[0-9]+.[0-9]+$")
-}
-
-fun KotlinVersionFetcher.Companion.default(
-    httpClient: HttpClient
-): KotlinVersionFetcher {
-    return MavenCentralKotlinVersionFetcher(
-        httpClient = httpClient
-    )
 }
 
 @JsonIgnoreProperties("groupId", "artifactId")

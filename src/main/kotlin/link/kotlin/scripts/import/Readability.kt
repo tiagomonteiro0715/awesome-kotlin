@@ -7,7 +7,6 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import kotlinx.coroutines.runBlocking
 import link.kotlin.scripts.utils.HttpClient
 import link.kotlin.scripts.utils.body
-import link.kotlin.scripts.utils.default
 import link.kotlin.scripts.utils.parseInstant
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.client.utils.URIBuilder
@@ -32,7 +31,7 @@ class Readability(
 fun main() = runBlocking {
     val mapper = jacksonObjectMapper()
     val readability = Readability(
-        HttpClient.default()
+        HttpClient()
     )
 
     val response = readability.getArticle("https://blog.jetbrains.com/kotlin/2017/03/kotlin-1-1-1-is-out/")

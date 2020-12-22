@@ -1,11 +1,10 @@
 package link.kotlin.scripts
 
-import link.kotlin.scripts.utils.HttpClient
-import link.kotlin.scripts.utils.default
+import io.heapy.komodo.di.createContextAndGet
+import io.heapy.komodo.di.type
 
 suspend fun main() {
-    val client = HttpClient.default()
-    val fetcher = KotlinVersionFetcher.default(client)
+    val fetcher = createContextAndGet(type<KotlinVersionFetcher>(), generatorModule)
     val versions = fetcher.getLatestVersions(listOf("1.3", "1.4"))
     println(versions)
 }
