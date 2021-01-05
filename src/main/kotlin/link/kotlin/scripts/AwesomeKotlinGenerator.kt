@@ -64,7 +64,7 @@ val generatorModule by module {
 
     provide(::ObjectMapper)
     provide(::HttpClient)
-    provide(::markdownRenderer)
+    provide(::MarkdownRenderer)
     provide(::ApplicationConfiguration)
     provide(::GithubTrending)
     provide(::Cache)

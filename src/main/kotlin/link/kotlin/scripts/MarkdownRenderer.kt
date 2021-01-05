@@ -19,7 +19,7 @@ private class CommonMarkMarkdownRenderer(
     }
 }
 
-fun markdownRenderer(): MarkdownRenderer {
+fun MarkdownRenderer(): MarkdownRenderer {
     val extensions = listOf(TablesExtension.create())
     val parser = Parser.builder().extensions(extensions).build()
     val renderer = HtmlRenderer.builder().extensions(extensions).build()
