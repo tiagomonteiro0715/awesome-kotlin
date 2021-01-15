@@ -40,7 +40,7 @@ dependencies {
     implementation("org.jsoup:jsoup:1.13.1")
     implementation("by.heap.remark:remark-kotlin:1.2.0")
 
-    implementation("io.heapy.komodo:komodo:0.1.0-development+000083")
+    implementation("io.heapy.komodo:komodo:0.1.0-development+000084")
 
     implementation(kotlin("scripting-common"))
     implementation(kotlin("scripting-jvm"))
